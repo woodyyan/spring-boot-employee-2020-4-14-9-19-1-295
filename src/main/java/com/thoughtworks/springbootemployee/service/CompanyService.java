@@ -1,6 +1,7 @@
 package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.model.Company;
+import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,10 @@ public class CompanyService {
         if (companyUpdate.getEmployees() != null) {
             company.setEmployees(companyUpdate.getEmployees());
         }
+    }
+
+    public List<Employee> getEmployees(Integer companyId) {
+        Company company = companyRepository.findById(companyId);
+        return company.getEmployees();
     }
 }
