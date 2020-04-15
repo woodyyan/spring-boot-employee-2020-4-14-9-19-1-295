@@ -16,8 +16,8 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping
-    public List<Employee> getAll() {
-        return employeeService.getAll();
+    public List<Employee> getAll(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer pageSize) {
+        return employeeService.getAll(page, pageSize);
     }
 
     @GetMapping("/{employeeId}")

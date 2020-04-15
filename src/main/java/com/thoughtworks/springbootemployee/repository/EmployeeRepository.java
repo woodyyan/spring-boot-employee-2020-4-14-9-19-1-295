@@ -20,8 +20,17 @@ public class EmployeeRepository {
         employees.add(new Employee(4, "Xiaoxia", 15, "Male"));
     }
 
-    public List<Employee> findAll() {
-        return employees;
+    public List<Employee> findAll(Integer page, Integer pageSize) {
+        int fromIndex;
+        int toIndex;
+        if (page == null || pageSize == null) {
+            fromIndex = 0;
+            toIndex = employees.size();
+        } else {
+            fromIndex = (page - 1) * pageSize;
+            toIndex = Math.min((fromIndex + pageSize), employees.size());
+        }
+        return employees.subList(fromIndex, toIndex);
     }
 
     public Employee findById(Integer employeeId) {
