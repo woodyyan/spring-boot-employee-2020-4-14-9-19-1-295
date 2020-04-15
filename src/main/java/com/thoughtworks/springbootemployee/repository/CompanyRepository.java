@@ -39,4 +39,15 @@ public class CompanyRepository {
         }
         return companies.subList(fromIndex, toIndex);
     }
+
+    public Company findById(Integer companyId) {
+        return companies.stream()
+                .filter(company -> company.getId().equals(companyId))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public void add(Company company) {
+        companies.add(company);
+    }
 }

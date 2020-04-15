@@ -16,4 +16,12 @@ public class CompanyService {
     public List<Company> getAll(Integer page, Integer pageSize) {
         return companyRepository.findAll(page, pageSize);
     }
+
+    public Company get(Integer companyId) {
+        return companyRepository.findById(companyId);
+    }
+
+    public void create(Company company) {
+        companyRepository.add(company);
+    }
 }
