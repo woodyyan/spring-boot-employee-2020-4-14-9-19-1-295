@@ -17,6 +17,11 @@ public class CompanyController {
     private CompanyService companyService;
 
     @GetMapping
+    public List<Company> getAll() {
+        return companyService.getAll();
+    }
+
+    @GetMapping(params = {"page", "pageSize"})
     public List<Company> getAll(
             @RequestParam(required = false) Integer page,
             @RequestParam(required = false) Integer pageSize

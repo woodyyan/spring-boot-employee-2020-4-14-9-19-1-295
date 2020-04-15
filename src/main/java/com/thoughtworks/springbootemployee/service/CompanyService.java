@@ -15,6 +15,10 @@ public class CompanyService {
     @Autowired
     private CompanyRepository companyRepository;
 
+    public List<Company> getAll() {
+        return companyRepository.findAll();
+    }
+
     public List<Company> getAll(Integer page, Integer pageSize) {
         return companyRepository.findAll(page, pageSize);
     }

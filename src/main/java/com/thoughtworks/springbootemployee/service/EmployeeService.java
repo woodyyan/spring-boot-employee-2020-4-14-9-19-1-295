@@ -13,6 +13,10 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    public List<Employee> getAll() {
+        return employeeRepository.findAll();
+    }
+
     public List<Employee> getAll(Integer page, Integer pageSize) {
         return employeeRepository.findAll(page, pageSize);
     }

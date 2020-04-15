@@ -27,16 +27,13 @@ public class CompanyRepository {
         companies.add(new Company(1, "boot", 2, employeesInBoot));
     }
 
+    public List<Company> findAll() {
+        return companies;
+    }
+
     public List<Company> findAll(Integer page, Integer pageSize) {
-        int fromIndex;
-        int toIndex;
-        if (page == null || pageSize == null) {
-            fromIndex = 0;
-            toIndex = companies.size();
-        } else {
-            fromIndex = (page - 1) * pageSize;
-            toIndex = Math.min((fromIndex + pageSize), companies.size());
-        }
+        int fromIndex = (page - 1) * pageSize;
+        int toIndex = Math.min((fromIndex + pageSize), companies.size());
         return companies.subList(fromIndex, toIndex);
     }
 
