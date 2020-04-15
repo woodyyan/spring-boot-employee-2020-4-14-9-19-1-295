@@ -14,10 +14,14 @@ public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
     public List<Employee> getAll() {
-        return employeeRepository.findAllEmployee();
+        return employeeRepository.findAll();
     }
 
     public Employee get(Integer employeeId) {
-        return employeeRepository.findEmployeeById(employeeId);
+        return employeeRepository.findById(employeeId);
+    }
+
+    public void create(Employee employee) {
+        employeeRepository.add(employee);
     }
 }

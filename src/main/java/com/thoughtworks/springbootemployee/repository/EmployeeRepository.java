@@ -20,14 +20,18 @@ public class EmployeeRepository {
         employees.add(new Employee(4, "Xiaoxia", 15, "Male"));
     }
 
-    public List<Employee> findAllEmployee() {
+    public List<Employee> findAll() {
         return employees;
     }
 
-    public Employee findEmployeeById(Integer employeeId) {
+    public Employee findById(Integer employeeId) {
         return employees.stream()
                 .filter(employee -> employee.getId().equals(employeeId))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public void add(Employee employee) {
+        employees.add(employee);
     }
 }
