@@ -42,4 +42,8 @@ public class EmployeeService {
             employee.setGender(employeeUpdate.getGender());
         }
     }
+
+    public List<Employee> getByGender(String gender) {
+        return employeeRepository.findByGender(gender);
+    }
 }

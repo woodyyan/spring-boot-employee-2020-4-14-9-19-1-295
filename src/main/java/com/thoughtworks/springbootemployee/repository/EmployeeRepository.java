@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class EmployeeRepository {
@@ -46,5 +47,11 @@ public class EmployeeRepository {
 
     public void remove(Employee employee) {
         employees.remove(employee);
+    }
+
+    public List<Employee> findByGender(String gender) {
+        return employees.stream()
+                .filter(employee -> employee.getGender().toLowerCase().equals(gender.toLowerCase()))
+                .collect(Collectors.toList());
     }
 }

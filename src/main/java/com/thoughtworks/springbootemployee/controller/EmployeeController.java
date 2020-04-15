@@ -16,7 +16,14 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping
-    public List<Employee> getAll(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer pageSize) {
+    public List<Employee> getAll(
+            @RequestParam(required = false) Integer page,
+            @RequestParam(required = false) Integer pageSize,
+            @RequestParam(required = false) String gender
+    ) {
+        if (gender != null) {
+            return employeeService.getByGender(gender);
+        }
         return employeeService.getAll(page, pageSize);
     }
 
