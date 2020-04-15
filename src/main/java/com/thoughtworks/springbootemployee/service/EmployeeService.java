@@ -41,6 +41,9 @@ public class EmployeeService {
         if (employeeUpdate.getGender() != null) {
             employee.setGender(employeeUpdate.getGender());
         }
+        if (employeeUpdate.getSalary() != null) {
+            employee.setSalary(employeeUpdate.getSalary());
+        }
     }
 
     public List<Employee> getByGender(String gender) {
