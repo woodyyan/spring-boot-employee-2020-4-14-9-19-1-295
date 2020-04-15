@@ -5,6 +5,7 @@ import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,6 +24,11 @@ public class CompanyService {
 
     public void create(Company company) {
         companyRepository.add(company);
+    }
+
+    public void deleteEmployees(Integer companyId) {
+        Company company = companyRepository.findById(companyId);
+        company.setEmployees(new ArrayList<>());
     }
 
     public void update(Integer companyId, Company companyUpdate) {
