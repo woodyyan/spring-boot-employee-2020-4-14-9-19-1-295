@@ -24,4 +24,9 @@ public class EmployeeService {
     public void create(Employee employee) {
         employeeRepository.add(employee);
     }
+
+    public void delete(Integer employeeId) {
+        Employee employee = employeeRepository.findById(employeeId);
+        employeeRepository.remove(employee);
+    }
 }

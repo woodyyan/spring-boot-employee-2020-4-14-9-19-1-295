@@ -30,4 +30,9 @@ public class EmployeeController {
     public void create(@RequestBody Employee employee) {
         employeeService.create(employee);
     }
+
+    @DeleteMapping("/{employeeId}")
+    public void delete(@PathVariable Integer employeeId) {
+        employeeService.delete(employeeId);
+    }
 }
