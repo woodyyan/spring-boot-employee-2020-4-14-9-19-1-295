@@ -24,4 +24,17 @@ public class CompanyService {
     public void create(Company company) {
         companyRepository.add(company);
     }
+
+    public void update(Integer companyId, Company companyUpdate) {
+        Company company = companyRepository.findById(companyId);
+        if (companyUpdate.getCompanyName() != null) {
+            company.setCompanyName(companyUpdate.getCompanyName());
+        }
+        if (companyUpdate.getEmployeeNumber() != null) {
+            company.setEmployeeNumber(companyUpdate.getEmployeeNumber());
+        }
+        if (companyUpdate.getEmployees() != null) {
+            company.setEmployees(companyUpdate.getEmployees());
+        }
+    }
 }
