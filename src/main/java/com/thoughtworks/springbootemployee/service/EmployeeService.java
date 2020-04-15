@@ -29,4 +29,17 @@ public class EmployeeService {
         Employee employee = employeeRepository.findById(employeeId);
         employeeRepository.remove(employee);
     }
+
+    public void update(Integer employeeId, Employee employeeUpdate) {
+        Employee employee = employeeRepository.findById(employeeId);
+        if (employeeUpdate.getName() != null) {
+            employee.setName(employeeUpdate.getName());
+        }
+        if (employeeUpdate.getAge() != null) {
+            employee.setAge(employeeUpdate.getAge());
+        }
+        if (employeeUpdate.getGender() != null) {
+            employee.setGender(employeeUpdate.getGender());
+        }
+    }
 }
