@@ -31,7 +31,7 @@ public class CompanyService {
         companyRepository.add(company);
     }
 
-    public void deleteEmployees(Integer companyId) {
+    public void deleteEmployeesInCompany(Integer companyId) {
         Company company = companyRepository.findById(companyId);
         company.setEmployees(new ArrayList<>());
     }
