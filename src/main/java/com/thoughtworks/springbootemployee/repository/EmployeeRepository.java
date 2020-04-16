@@ -33,13 +33,14 @@ public class EmployeeRepository {
 
     public Employee findById(Integer employeeId) {
         return employees.stream()
-                .filter(employee -> employee.getId().equals(employeeId))
-                .findFirst()
-                .orElse(null);
+            .filter(employee -> employee.getId().equals(employeeId))
+            .findFirst()
+            .orElse(null);
     }
 
-    public void add(Employee employee) {
+    public Employee add(Employee employee) {
         employees.add(employee);
+        return employee;
     }
 
     public void remove(Employee employee) {
@@ -48,7 +49,7 @@ public class EmployeeRepository {
 
     public List<Employee> findByGender(String gender) {
         return employees.stream()
-                .filter(employee -> employee.getGender().toLowerCase().equals(gender.toLowerCase()))
-                .collect(Collectors.toList());
+            .filter(employee -> employee.getGender().toLowerCase().equals(gender.toLowerCase()))
+            .collect(Collectors.toList());
     }
 }

@@ -27,8 +27,8 @@ public class CompanyService {
         return companyRepository.findById(companyId);
     }
 
-    public void create(Company company) {
-        companyRepository.add(company);
+    public Company create(Company company) {
+        return companyRepository.add(company);
     }
 
     public void deleteEmployeesInCompany(Integer companyId) {
@@ -36,7 +36,7 @@ public class CompanyService {
         company.setEmployees(new ArrayList<>());
     }
 
-    public void update(Integer companyId, Company companyUpdate) {
+    public Company update(Integer companyId, Company companyUpdate) {
         Company company = companyRepository.findById(companyId);
         if (companyUpdate.getCompanyName() != null) {
             company.setCompanyName(companyUpdate.getCompanyName());
@@ -47,6 +47,7 @@ public class CompanyService {
         if (companyUpdate.getEmployees() != null) {
             company.setEmployees(companyUpdate.getEmployees());
         }
+        return company;
     }
 
     public List<Employee> getEmployees(Integer companyId) {

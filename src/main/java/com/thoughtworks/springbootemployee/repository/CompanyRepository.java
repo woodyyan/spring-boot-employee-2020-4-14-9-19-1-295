@@ -39,12 +39,13 @@ public class CompanyRepository {
 
     public Company findById(Integer companyId) {
         return companies.stream()
-                .filter(company -> company.getId().equals(companyId))
-                .findFirst()
-                .orElse(null);
+            .filter(company -> company.getId().equals(companyId))
+            .findFirst()
+            .orElse(null);
     }
 
-    public void add(Company company) {
+    public Company add(Company company) {
         companies.add(company);
+        return company;
     }
 }
