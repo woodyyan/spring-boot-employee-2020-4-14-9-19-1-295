@@ -1,8 +1,6 @@
 package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.model.Employee;
-import com.thoughtworks.springbootemployee.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,18 +13,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    @Autowired
-    private EmployeeService employeeService;
+    private List<Employee> employees = new ArrayList<>();
+
+    public EmployeeController() {
+        employees.add(new Employee(0, "Woody", 20, "Male", 0));
+        employees.add(new Employee(1, "Kit", 19, "Male", 0));
+        employees.add(new Employee(2, "Hilary", 15, "Female", 0));
+        employees.add(new Employee(3, "Leo", 16, "Male", 0));
+        employees.add(new Employee(4, "Jay", 15, "Male", 0));
+    }
 
     @GetMapping
     public List<Employee> getAll() {
-        return employeeService.getAll();
+        return employees;
     }
 
     @GetMapping(params = {"page", "pageSize"})
@@ -34,32 +41,62 @@ public class EmployeeController {
         @RequestParam(required = false) Integer page,
         @RequestParam(required = false) Integer pageSize
     ) {
-        return employeeService.getAll(page, pageSize);
+        int fromIndex = (page - 1) * pageSize;
+        int toIndex = Math.min((fromIndex + pageSize), employees.size());
+        return employees.subList(fromIndex, toIndex);
     }
 
     @GetMapping(params = "gender")
     public List<Employee> getByGender(@RequestParam String gender) {
-        return employeeService.getByGender(gender);
+        return employees.stream()
+            .filter(employee -> employee.getGender().toLowerCase().equals(gender.toLowerCase()))
+            .collect(Collectors.toList());
     }
 
     @GetMapping("/{employeeId}")
     public Employee get(@PathVariable Integer employeeId) {
-        return employeeService.get(employeeId);
+        return employees.stream()
+            .filter(employee -> employee.getId().equals(employeeId))
+            .findFirst()
+            .orElse(null);
     }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Employee create(@RequestBody Employee employee) {
-        return employeeService.create(employee);
+        employees.add(employee);
+        return employee;
     }
 
     @DeleteMapping("/{employeeId}")
     public void delete(@PathVariable Integer employeeId) {
-        employeeService.delete(employeeId);
+        Employee deletingEmployee = employees.stream()
+            .filter(employee -> employee.getId().equals(employeeId))
+            .findFirst()
+            .orElse(null);
+        employees.remove(deletingEmployee);
     }
 
     @PutMapping("/{employeeId}")
     public Employee update(@PathVariable Integer employeeId, @RequestBody Employee employee) {
-        return employeeService.update(employeeId, employee);
+        Employee updatingEmployee = employees.stream()
+            .filter(employeeItem -> employeeItem.getId().equals(employeeId))
+            .findFirst()
+            .orElse(null);
+        if (updatingEmployee != null) {
+            if (employee.getName() != null) {
+                updatingEmployee.setName(employee.getName());
+            }
+            if (employee.getAge() != null) {
+                updatingEmployee.setAge(employee.getAge());
+            }
+            if (employee.getGender() != null) {
+                updatingEmployee.setGender(employee.getGender());
+            }
+            if (employee.getSalary() != null) {
+                updatingEmployee.setSalary(employee.getSalary());
+            }
+        }
+        return updatingEmployee;
     }
 }
