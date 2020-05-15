@@ -43,7 +43,7 @@ public class EmployeeRepository {
         return employee;
     }
 
-    public void remove(Employee employee) {
+    public void delete(Employee employee) {
         employees.remove(employee);
     }
 

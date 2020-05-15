@@ -31,7 +31,7 @@ public class EmployeeService {
 
     public void delete(Integer employeeId) {
         Employee employee = employeeRepository.findById(employeeId);
-        employeeRepository.remove(employee);
+        employeeRepository.delete(employee);
     }
 
     public Employee update(Integer employeeId, Employee employeeUpdate) {
